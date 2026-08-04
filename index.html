@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Course Portal | Department of Mathematics</title>
+  <style>
+    /* ==========================================================================
+       PUP COLOR PALETTE & VARIABLES
+       ========================================================================== */
+    :root {
+      --pup-maroon: #800000;
+      --pup-maroon-dark: #5a0000;
+      --pup-gold: #ffc72c;
+      --pup-gold-hover: #e0ac1b;
+      --text-dark: #222222;
+      --text-muted: #555555;
+      --bg-light: #f8f9fa;
+      --bg-card: #ffffff;
+      --border-color: #e2e8f0;
+      --font-main: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: var(--font-main);
+      color: var(--text-dark);
+      background-color: var(--bg-light);
+      line-height: 1.6;
+    }
+
+    /* ==========================================================================
+       HEADER & NAVIGATION
+       ========================================================================== */
+    header {
+      background-color: var(--pup-maroon);
+      color: white;
+      padding: 2.5rem 1.5rem 1.5rem 1.5rem;
+      border-bottom: 4px solid var(--pup-gold);
+    }
+
+    .header-container {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .portal-badge {
+      display: inline-block;
+      background-color: var(--pup-gold);
+      color: var(--pup-maroon-dark);
+      font-weight: 700;
+      font-size: 0.85rem;
+      padding: 0.2rem 0.6rem;
+      border-radius: 4px;
+      margin-bottom: 0.5rem;
+      text-transform: uppercase;
+    }
+
+    header h1 {
+      font-size: 2.2rem;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+    }
+
+    header p {
+      color: rgba(255, 255, 255, 0.85);
+      font-size: 1rem;
+      margin-top: 0.25rem;
+    }
+
+    nav {
+      background-color: var(--pup-maroon-dark);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .nav-container {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      gap: 1.5rem;
+      padding: 0 1.5rem;
+      overflow-x: auto;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.95rem;
+      padding: 0.85rem 0;
+      border-bottom: 3px solid transparent;
+      transition: all 0.2s ease;
+    }
+
+    nav a:hover, nav a.active {
+      color: var(--pup-gold);
+      border-bottom-color: var(--pup-gold);
+    }
+
+    /* ==========================================================================
+       LAYOUT STRUCTURE & CARDS
+       ========================================================================== */
+    .main-container {
+      max-width: 1100px;
+      margin: 2rem auto;
+      padding: 0 1.5rem;
+      display: grid;
+      grid-template-columns: 2.5fr 1fr;
+      gap: 2rem;
+    }
+
+    @media (max-width: 768px) {
+      .main-container {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .card {
+      background-color: var(--bg-card);
+      border-radius: 8px;
+      padding: 1.75rem;
+      margin-bottom: 1.5rem;
+      border: 1px solid var(--border-color);
+      box-shadow: 0 2px 4px rgba(0,0,0,0.03);
+    }
+
+    h2 {
+      color: var(--pup-maroon);
+      font-size: 1.4rem;
+      margin-bottom: 1rem;
+      padding-bottom: 0.4rem;
+      border-bottom: 2px solid var(--border-color);
+    }
+
+    /* Course Selection Grid */
+    .courses-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+      margin-top: 1rem;
+    }
+
+    .course-card {
+      border: 1px solid var(--border-color);
+      border-top: 4px solid var(--pup-maroon);
+      border-radius: 6px;
+      padding: 1.5rem;
+      background-color: var(--bg-card);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .course-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    }
+
+    .course-code {
+      display: inline-block;
+      background-color: var(--pup-gold);
+      color: var(--pup-maroon-dark);
+      font-weight: 700;
+      font-size: 0.8rem;
+      padding: 0.15rem 0.5rem;
+      border-radius: 4px;
+      margin-bottom: 0.5rem;
+      text-transform: uppercase;
+      align-self: flex-start;
+    }
+
+    .course-card h3 {
+      font-size: 1.25rem;
+      color: var(--text-dark);
+      margin-bottom: 0.5rem;
+    }
+
+    .course-card p {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      margin-bottom: 1.25rem;
+      flex-grow: 1;
+    }
+
+    /* Announcements */
+    .announcement {
+      background-color: rgba(253, 203, 2, 0.08);
+      border-left: 4px solid var(--pup-gold);
+      padding: 1rem;
+      border-radius: 0 6px 6px 0;
+      margin-bottom: 1rem;
+    }
+
+    .announcement-date {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      font-weight: 600;
+    }
+
+    /* Buttons */
+    .btn {
+      display: inline-block;
+      background-color: var(--pup-maroon);
+      color: white;
+      padding: 0.55rem 1.1rem;
+      border-radius: 5px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.9rem;
+      text-align: center;
+      transition: background-color 0.2s ease;
+    }
+
+    .btn:hover {
+      background-color: var(--pup-maroon-dark);
+    }
+
+    /* ==========================================================================
+       FOOTER
+       ========================================================================== */
+    footer {
+      background-color: var(--text-dark);
+      color: #bbbbbb;
+      text-align: center;
+      padding: 2rem 1.5rem;
+      font-size: 0.85rem;
+      margin-top: 4rem;
+    }
+
+    footer a {
+      color: var(--pup-gold);
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header Banner -->
+  <header>
+    <div class="header-container">
+      <span class="portal-badge">Department of Mathematics</span>
+      <h1>Course Portal</h1>
+      <p>Polytechnic University of the Philippines &bull; First Semester, AY 2026-2027</p>
+    </div>
+  </header>
+
+  <!-- Navigation Bar -->
+  <nav>
+    <div class="nav-container">
+      <a href="index.html" class="active">Portal Home</a>
+      <a href="src/Math 203/math203.html">MATH 203</a>
+      <a href="math206.html">MATH 206</a>
+    </div>
+  </nav>
+
+  <!-- Main Content Grid -->
+  <div class="main-container">
+    
+    <!-- Left / Primary Column -->
+    <main>
+      
+      <!-- Welcome Section -->
+      <section class="card">
+        <h2>Welcome to the Course Portal</h2>
+        <p>Select a course below to access instructional modules, course announcements, lecture notes, and downloadable resources for the current academic semester.</p>
+        
+        <!-- Course Selection Grid -->
+        <div class="courses-grid">
+          
+          <!-- MATH 203 Card -->
+          <div class="course-card">
+            <div>
+              <span class="course-code">MATH 203</span>
+              <h3>Abstract Algebra 1</h3>
+              <p>An introduction to algebraic structures including groups, subgroups, permutation groups, homomorphisms, quotient groups, rings, and fields.</p>
+            </div>
+            <a href="src/Math 203/math203.html" class="btn">Access MATH 203 &rarr;</a>
+          </div>
+
+          <!-- MATH 206 Card -->
+          <div class="course-card">
+            <div>
+              <span class="course-code">MATH 206</span>
+              <h3>Linear Algebra & Matrix Theory</h3>
+              <p>A comprehensive study of vector spaces, linear transformations, matrices, determinants, eigenvalues, eigenvectors, and inner product spaces.</p>
+            </div>
+            <a href="math206.html" class="btn">Access MATH 206 &rarr;</a>
+          </div>
+
+        </div>
+      </section>
+
+    </main>
+
+    <!-- Right / Secondary Column (Sidebar) -->
+    <aside>
+
+      <!-- Instructor Info -->
+      <div class="card">
+        <h2>Lecturer</h2>
+        <p><strong>John Patrick B. Sta. Maria</strong></p>
+        <p style="font-size: 0.9rem; color: var(--text-muted);">Associate Professor</p>
+        <p style="font-size: 0.9rem; color: var(--text-muted);">Department of Mathematics and Statistics</p>
+        <hr style="margin: 0.8rem 0; border: none; border-top: 1px solid var(--border-color);">
+        <p style="font-size: 0.85rem;"><strong>Office Hours:</strong> By appointment</p>
+        <p style="font-size: 0.85rem;"><strong>Email:</strong> <a href="mailto:jpbstamaria@pup.edu.ph"> jpbstamaria@pup.edu.ph<a></p>
+      </div>
+
+      <!-- Department Announcements -->
+      <div class="card">
+        <h2>General Updates</h2>
+        
+        <div class="announcement">
+          <div class="announcement-date">August 3, 2026</div>
+          <p style="font-size: 0.9rem; margin-top: 0.2rem;">Welcome to the new academic term! Course materials for both MATH 203 and MATH 206 are now active.</p>
+        </div>
+
+      </div>
+
+    </aside>
+
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2026 Polytechnic University of the Philippines &bull; Course Portal</p>
+    <p style="margin-top: 0.4rem;"><a href="#">Back to top</a></p>
+  </footer>
+
+</body>
+</html>
